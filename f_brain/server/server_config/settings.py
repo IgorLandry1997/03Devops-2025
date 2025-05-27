@@ -33,3 +33,5 @@ DATABASES = {
         'PORT': 5432,
     }
 }
+
+OPENWEATHER_API_KEY = os.getenv("64d37a0c621df8108d3c186b03723ed3")
