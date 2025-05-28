@@ -35,3 +35,11 @@ DATABASES = {
 }
 
 OPENWEATHER_API_KEY = os.getenv("64d37a0c621df8108d3c186b03723ed3")
+
+# settings.py
+ALLOWED_HOSTS = ['*']
+CORS_ALLOW_ALL_ORIGINS = True
+
+INSTALLED_APPS += ["corsheaders"]
+MIDDLEWARE = ["corsheaders.middleware.CorsMiddleware"] + MIDDLEWARE
+
