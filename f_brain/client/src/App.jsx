@@ -1,6 +1,7 @@
 // src/App.jsx
-import { useState } from "react";
+import React, { useState } from "react";
 import SearchBar from "./components/SearchBar";
+import WeatherCard from "./components/WeatherCard";
 import HistoryList from "./components/HistoryList";
 import "./App.css";
 
@@ -9,28 +10,39 @@ function App() {
   const [history, setHistory] = useState([]);
 
   const handleSearch = (city) => {
-    // Simule une réponse météo
-    const fakeData = {
+    const data = {
       city,
-      temperature: Math.floor(Math.random() * 30) + "°C",
-      condition: "Sunny ☀️",
+      country: "Demo",
+      temp: "12°C",
+      feels_like: "11°C",
+      high: "17°C",
+      low: "7°C",
+      condition: "Light Rain",
+      icon: "🌧️",
+      wind: "8.2 m/s NE",
+      humidity: "6%",
+      visibility: "5.7 km",
+      pressure: "1004 hPa",
+      sunrise: "16:04",
+      sunset: "02:04",
+      timestamp: new Date().toLocaleString("fr-FR"),
     };
-    setWeather(fakeData);
-    setHistory((prev) => [fakeData, ...prev]);
+
+    setWeather(data);
+    setHistory((prev) => [data, ...prev]);
   };
 
   return (
-    <div className="app">
-      <h1>🌤️ MétéoApp</h1>
-      <SearchBar onSearch={handleSearch} />
-      {weather && (
-        <div className="result">
-          <h2>{weather.city}</h2>
-          <p>{weather.temperature}</p>
-          <p>{weather.condition}</p>
-        </div>
-      )}
-      <HistoryList history={history} />
+    <div className="container">
+      <aside className="sidebar">
+        <h2>Search History</h2>
+        <HistoryList history={history} />
+      </aside>
+      <main className="main-content">
+        <h1>🌤️ Weather App</h1>
+        <SearchBar onSearch={handleSearch} />
+        {weather && <WeatherCard data={weather} />}
+      </main>
     </div>
   );
 }

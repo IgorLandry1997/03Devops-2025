@@ -1,0 +1,48 @@
+.weather-card {
+  background: linear-gradient(to bottom right, #2563eb, #1e3a8a);
+  border-radius: 20px;
+  padding: 20px;
+  margin-top: 20px;
+  color: white;
+}
+
+.top-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.condition {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.temperature h2 {
+  font-size: 48px;
+  margin: 0;
+}
+
+.details-grid {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.details-grid div {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 12px;
+  text-align: center;
+  width: 23%;
+}
+
+.sun-times {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+}

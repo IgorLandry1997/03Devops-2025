@@ -1,0 +1,23 @@
+.search-bar {
+  display: flex;
+  margin-bottom: 20px;
+  background-color: #374151;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  color: white;
+}
+
+.search-bar button {
+  background-color: #2563eb;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  color: white;
+}

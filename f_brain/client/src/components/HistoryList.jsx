@@ -1,26 +1,17 @@
-import { useEffect, useState } from 'react';
+// src/components/HistoryList.jsx
+import "./HistoryList.css";
 
-function History() {
-  const [history, setHistory] = useState([]);
-
-  useEffect(() => {
-    fetch('/api/history/')
-      .then(res => res.json())
-      .then(data => setHistory(data));
-  }, []);
-
+function HistoryList({ history }) {
   return (
-    <div className="history">
-      <h2>Historique</h2>
-      <ul>
-        {history.map((item, i) => (
-          <li key={i}>
-            {item.location} : {item.temperature}°C ({item.description}) – {new Date(item.searched_at).toLocaleString()}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="history-list">
+      {history.map((entry, idx) => (
+        <li key={idx}>
+          <p>📍 {entry.city}, {entry.country}</p>
+          <small>{entry.timestamp}</small>
+        </li>
+      ))}
+    </ul>
   );
 }
 
-export default History;
+export default HistoryList;

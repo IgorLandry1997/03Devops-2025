@@ -1,24 +1,28 @@
-import { useState } from 'react';
+// src/components/SearchBar.jsx
+import { useState } from "react";
+import "./SearchBar.css";
 
 function SearchBar({ onSearch }) {
-  const [location, setLocation] = useState('');
+  const [city, setCity] = useState("");
 
-  const handleSearch = async () => {
-    const res = await fetch(`/api/weather/?location=${location}`);
-    const data = await res.json();
-    onSearch(data);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (city.trim()) {
+      onSearch(city);
+      setCity("");
+    }
   };
 
   return (
-    <div className="search-bar">
+    <form className="search-bar" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Entrez une ville..."
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
+        placeholder="Douala"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
       />
-      <button onClick={handleSearch}>Rechercher</button>
-    </div>
+      <button type="submit">🔍</button>
+    </form>
   );
 }
 
