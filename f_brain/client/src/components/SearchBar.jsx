@@ -1,27 +1,25 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-export default function SearchBar({ onSearch }) {
-  const [city, setCity] = useState("");
+function SearchBar({ onSearch }) {
+  const [location, setLocation] = useState('');
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (!city.trim()) return;
-    onSearch(city.trim());
-    setCity(""); // reset champ
-  }
+  const handleSearch = async () => {
+    const res = await fetch(`/api/weather/?location=${location}`);
+    const data = await res.json();
+    onSearch(data);
+  };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginBottom: 20 }}>
+    <div className="search-bar">
       <input
         type="text"
-        placeholder="Entrez une ville"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        style={{ width: "70%", padding: 8 }}
+        placeholder="Entrez une ville..."
+        value={location}
+        onChange={(e) => setLocation(e.target.value)}
       />
-      <button type="submit" style={{ padding: 8, marginLeft: 8 }}>
-        Rechercher
-      </button>
-    </form>
+      <button onClick={handleSearch}>Rechercher</button>
+    </div>
   );
 }
+
+export default SearchBar;

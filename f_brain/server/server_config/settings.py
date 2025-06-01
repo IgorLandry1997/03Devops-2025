@@ -23,13 +23,15 @@ INSTALLED_APPS += [
     'corsheaders',  # Ajouté ici directement
 ]
 
+from decouple import config
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('POSTGRES_DB', 'devops_db'),
         'USER': os.getenv('POSTGRES_USER', 'devops_user'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'devops_pass'),
-        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+        'HOST': os.getenv('POSTGRES_HOST', 'db'),
         'PORT': 5432,
     }
 }

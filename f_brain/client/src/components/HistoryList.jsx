@@ -1,24 +1,26 @@
-export default function HistoryList({ history, onSelect }) {
+import { useEffect, useState } from 'react';
+
+function History() {
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    fetch('/api/history/')
+      .then(res => res.json())
+      .then(data => setHistory(data));
+  }, []);
+
   return (
-    <ul style={{ listStyle: "none", padding: 0 }}>
-      {history.map((item) => (
-        <li key={item.id} style={{ marginBottom: 10 }}>
-          <button
-            style={{
-              border: "none",
-              background: "#eee",
-              padding: 8,
-              width: "100%",
-              textAlign: "left",
-              borderRadius: 4,
-              cursor: "pointer",
-            }}
-            onClick={() => onSelect(item)}
-          >
-            {item.city} — {item.temperature} °C — {item.description}
-          </button>
-        </li>
-      ))}
-    </ul>
+    <div className="history">
+      <h2>Historique</h2>
+      <ul>
+        {history.map((item, i) => (
+          <li key={i}>
+            {item.location} : {item.temperature}°C ({item.description}) – {new Date(item.searched_at).toLocaleString()}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
+
+export default History;
