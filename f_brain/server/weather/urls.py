@@ -1,8 +1,7 @@
-# weather/urls.py
-
 from django.urls import path
-from .views import get_weather
+from . import views
 
 urlpatterns = [
-    path("weather/", get_weather, name="get_weather"),
+    path('save/', views.save_weather, name='save_weather'),
+    path('history/', views.get_history, name='get_history'),
 ]

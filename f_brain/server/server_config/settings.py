@@ -1,4 +1,12 @@
 import os
+from decouple import config
+
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+SECRET_KEY = config("SECRET_KEY")
+
 
 ROOT_URLCONF = 'server_config.urls'
 
@@ -27,18 +35,39 @@ INSTALLED_APPS += [
 
 from decouple import config
 
+#DATABASES = {
+#    'default': {
+#       'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': os.getenv('POSTGRES_DB', 'devops_db'),
+#        'USER': os.getenv('POSTGRES_USER', 'devops_user'),
+#        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'devops_pass'),
+#        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
+#        'PORT': 5432,
+#    }
+#}
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',
+#        'NAME': 'mydb',
+#        'USER': 'postgres',
+#        'PASSWORD': 'postgres',
+#        'HOST': 'localhost',
+#        'PORT': 5432,
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('POSTGRES_DB', 'devops_db'),
-        'USER': os.getenv('POSTGRES_USER', 'devops_user'),
-        'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'devops_pass'),
-        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
-        'PORT': 5432,
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',  # Fichier de base de données à la racine du projet
     }
 }
 
-OPENWEATHER_API_KEY = os.getenv("64d37a0c621df8108d3c186b03723ed3")
+
+
+OPENWEATHER_API_KEY = os.getenv("OPENWEATHER_API_KEY")
+
 
 ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
@@ -71,3 +100,12 @@ TEMPLATES = [
         },
     },
 ]
+DEBUG = os.getenv("DEBUG", "False") == "True"
+
+STATIC_URL = '/static/'
+
+# For development (optional)
+STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# For production (optional, used with collectstatic)
+STATIC_ROOT = BASE_DIR / "staticfiles"
