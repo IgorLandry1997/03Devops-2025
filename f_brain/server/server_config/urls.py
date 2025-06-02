@@ -1,5 +1,9 @@
-from django.urls import path, include
+from django.contrib import admin
+from django.urls import path
+from weather import views
 
 urlpatterns = [
-    path("api/", include("weather.urls")),
+    path("admin/", admin.site.urls),
+    path("api/save/", views.save_weather),
+    path("api/history/", views.get_history),
 ]

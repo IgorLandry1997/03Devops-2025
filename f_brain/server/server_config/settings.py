@@ -1,5 +1,7 @@
 import os
 
+ROOT_URLCONF = 'server_config.urls'
+
 CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", "amqp://guest:guest@rabbitmq:5672//")
 CELERY_RESULT_BACKEND = "django-db"
 CELERY_ACCEPT_CONTENT = ["json"]
@@ -31,7 +33,7 @@ DATABASES = {
         'NAME': os.getenv('POSTGRES_DB', 'devops_db'),
         'USER': os.getenv('POSTGRES_USER', 'devops_user'),
         'PASSWORD': os.getenv('POSTGRES_PASSWORD', 'devops_pass'),
-        'HOST': os.getenv('POSTGRES_HOST', 'db'),
+        'HOST': os.getenv('POSTGRES_HOST', 'localhost'),
         'PORT': 5432,
     }
 }
