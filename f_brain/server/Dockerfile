@@ -14,3 +14,5 @@ RUN poetry install --no-interaction --no-ansi --no-root
 COPY . .
 
 CMD ["gunicorn", "server_config.wsgi:application", "--bind", "0.0.0.0:8000"]
+
+CMD ["yarn", "dev", "--host", "0.0.0.0", "--port", "4173"]
