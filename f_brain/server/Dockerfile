@@ -4,7 +4,6 @@ WORKDIR /app
 RUN apt-get update \
     && apt-get install -y build-essential gcc libpq-dev \
     && pip install poetry==2.1.2 \
-    && pip install gunicorn \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY pyproject.toml poetry.lock ./
