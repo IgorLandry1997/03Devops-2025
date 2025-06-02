@@ -1,20 +1,23 @@
-import "./SearchBar.css";
+// src/components/SearchBar.jsx
 import { useState } from "react";
+import "./SearchBar.css";
 
-export default function SearchBar({ onSearch }) {
+function SearchBar({ onSearch }) {
   const [city, setCity] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (city.trim() !== "") onSearch(city.trim());
-    setCity("");
+    if (city.trim()) {
+      onSearch(city);
+      setCity("");
+    }
   };
 
   return (
     <form className="search-bar" onSubmit={handleSubmit}>
       <input
         type="text"
-        placeholder="Enter city..."
+        placeholder="Douala"
         value={city}
         onChange={(e) => setCity(e.target.value)}
       />
@@ -22,3 +25,5 @@ export default function SearchBar({ onSearch }) {
     </form>
   );
 }
+
+export default SearchBar;
