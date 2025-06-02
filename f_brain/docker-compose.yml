@@ -118,7 +118,7 @@ services:
     build:
       context: ./client
       dockerfile: Dockerfile
-    expose:
-      - "4173"
+    ports:
+      - "5173:5173"
     networks: [backend]
 
