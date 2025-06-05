@@ -82,6 +82,14 @@
   animation: float 3s ease-in-out infinite;
 }
 
+/* Country code styling */
+.country {
+  font-size: 1.2rem;
+  font-weight: normal;
+  opacity: 0.9;
+  color: #e2e8f0;
+}
+
 /* Animation: subtle floating */
 @keyframes float {
   0%   { transform: translateY(0px); }
