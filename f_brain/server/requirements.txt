@@ -5,3 +5,7 @@ django-celery-results
 django-celery-beat
 psycopg2-binary
 gunicorn
+requests
+python-dotenv
+djangorestframework
+django-cors-headers
