@@ -9,15 +9,15 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(""); // ✅ error state
 
-  // Charger l'historique des recherches au chargement de l'application
   useEffect(() => {
     const loadHistory = async () => {
       setLoading(true);
+      setError(""); // ✅ Clear previous errors
       try {
         const historyData = await fetchSearchHistory();
         if (historyData.length) {
-          // Convertir les données d'API au format attendu par HistoryList
           const formattedHistory = historyData.map(item => ({
             id: item.id,
             city: item.city,
@@ -29,6 +29,7 @@ function App() {
         }
       } catch (err) {
         console.error("Impossible de charger l'historique:", err);
+        setError("❌ Impossible de charger l'historique.");
       } finally {
         setLoading(false);
       }
@@ -37,13 +38,30 @@ function App() {
     loadHistory();
   }, []);
 
-  const handleSearch = async (city) => {
-    setLoading(true);
-    try {
+  const handleSearch = async (city, fromHistory = false) => {
+  setLoading(true);
+  setError("");
+
+  try {
+    if (fromHistory) {
+      // Get the stored weather data directly from the history array
+      const entry = history.find(item => item.city.toLowerCase() === city.toLowerCase());
+      if (entry) {
+        setWeatherData({
+          city: entry.city,
+          temperature: entry.temperature,
+          description: entry.description,
+        });
+      } else {
+        setError("Données non trouvées pour cette ville.");
+      }
+    } else {
+      // Fresh search from API
       const data = await fetchWeatherByCity(city);
       if (data) {
         setWeatherData(data);
-        // Rafraîchir l'historique après recherche
+
+        // Refresh history
         const historyData = await fetchSearchHistory();
         if (historyData.length) {
           const formattedHistory = historyData.map(item => ({
@@ -56,21 +74,25 @@ function App() {
           setHistory(formattedHistory);
         }
       }
-    } catch (err) {
-      console.error("Erreur lors de la recherche:", err);
-    } finally {
-      setLoading(false);
     }
-  };
+  } catch (err) {
+    console.error("Erreur lors de la recherche:", err);
+    setError("❌ Une erreur est survenue.");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="app-container">
       <div className="sidebar">
-        <HistoryList history={history} />
+        <HistoryList history={history} onSelect={handleSearch} />
       </div>
       <div className="main">
         <h1>☁️ Weather App</h1>
         <SearchBar onSearch={handleSearch} />
+        {error && <p className="error">{error}</p>} {/* ✅ Error UI */}
         {weatherData && <WeatherCard data={weatherData} />}
       </div>
     </div>

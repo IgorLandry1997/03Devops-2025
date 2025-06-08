@@ -1,6 +1,6 @@
 import "./HistoryList.css";
 
-export default function HistoryList({ history }) {
+export default function HistoryList({ history, onSelect }) {
   return (
     <div className="history-list">
       <h3>Search History</h3>
@@ -8,7 +8,12 @@ export default function HistoryList({ history }) {
         <div className="empty-history">Aucun historique disponible</div>
       ) : (
         history.map((item) => (
-          <div key={item.id || item.date} className="history-item">
+          <div
+            key={item.id || item.date}
+            className="history-item clickable-history"
+            onClick={() => onSelect?.(item.city)}
+            title="Cliquez pour relancer la recherche"
+          >
             <span>📍 {item.city}</span>
             {item.temperature && (
               <span className="temp">{Math.round(item.temperature)}°C</span>

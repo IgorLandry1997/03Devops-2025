@@ -45,3 +45,13 @@
   font-style: italic;
   padding: 1rem 0;
 }
+
+.clickable-history {
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clickable-history:hover {
+  background-color: #0474d0;
+}
+
