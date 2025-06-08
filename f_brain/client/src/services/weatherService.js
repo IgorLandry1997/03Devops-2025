@@ -37,3 +37,17 @@ export async function fetchSearchHistory(limit = 10) {
     return [];
   }
 }
+
+// Ajout de la fonction pour vider l'historique des recherches
+export async function clearSearchHistory() {
+  try {
+    const res = await fetch(`${BACKEND_URL}/history/clear`, {
+      method: 'DELETE',
+    });
+    if (!res.ok) throw new Error(`Erreur: ${res.status}`);
+    return true;
+  } catch (err) {
+    console.error("Clear history error:", err.message);
+    return false;
+  }
+}

@@ -33,3 +33,34 @@ body {
   font-weight: bold;
   margin-top: 10px;
 }
+
+
+.info-panel {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.weathercard, .historychart {
+  flex: 1 1 50%;
+  max-width: 500px;
+}
+
+.clear-history-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.clear-history-btn:hover {
+  background-color: #cc0000;
+}
