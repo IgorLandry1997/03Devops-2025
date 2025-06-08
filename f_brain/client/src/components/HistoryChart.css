@@ -1,0 +1,7 @@
+.history-chart {
+  background: linear-gradient(to right, #3b82f6, #1e3a8a);
+  padding: 16px;
+  border-radius: 12px;
+  text-decoration-color: beige;
+  box-shadow: 0 0 6px rgba(62, 60, 60, 0.05);
+}
