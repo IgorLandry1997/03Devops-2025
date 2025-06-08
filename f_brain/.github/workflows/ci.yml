@@ -7,7 +7,7 @@ on:
   push:
     branches:
       - dev
-      - feature?readme
+      - feature/readme
 
 jobs:
   build-and-test:
